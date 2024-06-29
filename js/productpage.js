@@ -1,11 +1,9 @@
-// productpage.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const productsGrid = document.getElementById('products-grid');
     const prevPageButton = document.getElementById('prev-page');
     const nextPageButton = document.getElementById('next-page');
     let currentPage = 1;
-    const productsPerPage = 9;
+    const productsPerPage = 12;
     const totalProducts = productsGrid.children.length;
 
     function displayProducts() {
@@ -37,4 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial display of products
     displayProducts();
+
+    // Make product cards clickable
+    const productCards = document.querySelectorAll('.product-card');
+    
+    productCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const productId = card.getAttribute('data-product-id');
+            window.location.href = `productview.php?id=${productId}`;
+        });
+    });
 });

@@ -1,88 +1,82 @@
-// Retrieve cart details from localStorage
-const cart = JSON.parse(localStorage.getItem('cart'));
-
-if (cart) {
-    // Display cart item
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const subtotalElement = document.getElementById('subtotal');
-    const discountElement = document.getElementById('discount');
-    const totalElement = document.getElementById('total');
-    const paymentSelect = document.getElementById('payment');
-
-    // Define delivery fee
-    const deliveryFee = 10;
-
-    function updateCart() {
-        cartItemsContainer.innerHTML = '';
-        let subtotal = 0;
-
-        cart.forEach((item, index) => {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-
-            cartItem.innerHTML = `
-                <input type="checkbox" checked>
-                <img src="${item.image}" alt="${item.name}">
-                <div class="cart-item-details">
-                    <h4>${item.name}</h4>
-                    <p>Size: ${item.size}</p>
-                    <p>Color: ${item.color}</p>
-                    <p>$${item.price}</p>
-                </div>
-                <div class="cart-item-controls">
-                    <button onclick="decreaseQuantity(${index})">-</button>
-                    <input type="text" value="${item.quantity}" readonly>
-                    <button onclick="increaseQuantity(${index})">+</button>
-                    <button onclick="removeFromCart(${index})">🗑️</button>
-                </div>
-            `;
-
-            cartItemsContainer.appendChild(cartItem);
-            subtotal += item.price * item.quantity;
-        });
-
-        const discount = subtotal * 0.2;
-        const total = subtotal - discount + deliveryFee;
-
-        subtotalElement.innerText = `$${subtotal.toFixed(2)}`;
-        discountElement.innerText = `-$${discount.toFixed(2)}`;
-        totalElement.innerText = `$${total.toFixed(2)}`;
-    }
-
-    function decreaseQuantity(index) {
-        if (cart[index].quantity > 1) {
-            cart[index].quantity--;
-            updateCart();
+function calculateTotal() {
+    const checkboxes = document.querySelectorAll('.cart-item-checkbox');
+    let subtotal = 0;
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            const price = parseFloat(checkbox.getAttribute('data-price'));
+            const quantity = parseInt(checkbox.getAttribute('data-quantity'));
+            subtotal += price * quantity;
         }
-    }
-
-    function increaseQuantity(index) {
-        cart[index].quantity++;
-        updateCart();
-    }
-
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        updateCart();
-    }
-
-    updateCart();
-
-    // Handle checkout button click
-    const checkoutButton = document.querySelector('.checkout-button');
-    checkoutButton.addEventListener('click', function() {
-        const selectedPaymentMethod = paymentSelect.value;
-        // Process payment based on selected method
-        processPayment(selectedPaymentMethod);
     });
-
-} else {
-    document.getElementById('cart-item-list').innerText = 'No items in cart.';
-    document.getElementById('order-summary-details').innerText = 'No items to summarize.';
+    const shippingFee = 10;
+    const total = subtotal + shippingFee;
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
 }
 
-// Function to process payment
-function processPayment(paymentMethod) {
-    // Implement payment processing logic here
-    alert(`Payment method selected: ${paymentMethod}`);
+function updateQuantity(id, delta) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update_cart.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            location.reload(); // Reload the page after updating
+        }
+    };
+    xhr.send('id=' + id + '&delta=' + delta);
+}
+
+function deleteCartItem(id) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'delete_cart_item.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            location.reload(); // Reload the page after deleting
+        }
+    };
+    xhr.send('id=' + id);
+}
+
+function checkout() {
+    const paymentMethod = document.getElementById('payment').value;
+    const totalAmount = document.getElementById('total').textContent.replace('$', '');
+
+    const orderDetails = {
+        name: 'Product Name', // Replace with actual product name
+        size: 'Product Size', // Replace with actual product size
+        flavor: 'Product Flavor', // Replace with actual product flavor
+        quantity: 1, // Replace with actual quantity
+        total: parseFloat(totalAmount), // Replace with actual total amount
+        payment_method: paymentMethod,
+        status: 'Pending' // Replace with initial status
+    };
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'checkout.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                alert('Order placed successfully!');
+                location.reload(); // Reload page or redirect to order confirmation
+            } else {
+                alert('Failed to place order: ' + response.error);
+            }
+        } else {
+            alert('Failed to connect to server.');
+        }
+    };
+    xhr.send(JSON.stringify({ order_details: orderDetails }));
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    calculateTotal(); // Calculate total on page load
+});
+
+// Example: Add event listener for checkout button
+const checkoutButton = document.querySelector('.checkout-button');
+if (checkoutButton) {
+    checkoutButton.addEventListener('click', checkout);
 }
