@@ -39,8 +39,9 @@
                         </ul>
                     </li>
                 </ul>
-                <a class="extra-info">There is a sentence written here</a>
+                
             </li>           
         </ul>
+        <a href="productpage.php" class="extra-info">All Products</a>
     </div>
 </nav1>

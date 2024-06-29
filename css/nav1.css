@@ -17,8 +17,7 @@ nav1 {
   float: right;
 }
 
-.nav-links1 {
-  flex: 1;
+.nav-links1 {  
   text-align: left;
 }
 
@@ -48,7 +47,7 @@ nav1 {
 .dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 5px); /* Adjusted to create space between menu and dropdown */
+  
   left: 0;
   background-color: #464444;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -113,4 +112,8 @@ nav1 {
   padding: 9px 25px;
   background: none;
   box-shadow: none;
+  text-decoration: none;
+  position: absolute;
+  top: 67%;  
+  left: 10%;
 }
