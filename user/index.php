@@ -1,119 +1,114 @@
-<?php session_start();?>
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta name="viewport" content="with=device-width, initial-scale=1.0" charset="utf-8">
-    <title>Escapologyglam</title>
-    <link rel="stylesheet" href="design.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <title>Shop.co</title>
+    <link rel="stylesheet" href="design.css">    
+    <link rel="stylesheet" href="css/nav1.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/249726be58.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <?php
-    if(isset($_SESSION['status']))
-    {
-      echo "<h4>".$_SESSION['status']."</h4>";
-      unset($_SESSION['status']);
-    }
-    ?>
     <section class="header">
-     <?php include("inc/nav_home.php"); ?>
+      <?php include("inc/nav.php"); ?>
+      <?php include("inc/nav1.php"); ?>
+    </section>
 
-      <div class="text-box">
-        <h1>Escapology Glamp</h1>
-        <p>THE BEST GLAMPERVAN OUT THERE!</p>
-        <a href="rentnow.php" class="hero-btn">Book Now!</a>
+    <h1 style="text-align: center;">New Arrivals!</h1>
+
+    <section class="slideshow-container">
+      <?php include("inc/slideshow.php"); ?>
+    </section>
+    
+    <section class="services">
+      <h1>Categories</h1>
+      <div class="row">
+        <a href="destination_url_here" class="services-col">
+          <img src="img/category1.jpg" alt="">
+          <h1>Dry Food</h1>
+        </a>
+        <a href="destination_url_here" class="services-col">
+          <img src="img/category2.jpg" alt="">
+          <h1>Wet Food</h1>
+        </a>
+        <a href="destination_url_here" class="services-col">
+          <img src="img/category3.jpg" alt="">
+          <h1>Treats</h1>
+        </a>
+        <a href="destination_url_here" class="services-col">
+          <img src="img/category4.jpg" alt="">
+          <h1>Medicine</h1>
+        </a>
       </div>
     </section>
-<!-------->
-<section class="services">
-  <h1>Services We Offer!</h1>
 
-  <div class="row">
-
-    <div class="services-col">
-      <h3>Retro Campervan</h3>
-      <p>Traveling with style doesn’t require fancy or luxurious vehicles. Sometimes, a classic caravan is all you need to have a wonderful time going on adventures.</p>
-    </div>
-
-    <div class="services-col">
-      <h3>Modern Glampervan</h3>
-      <p>It may be called a "Glampervan," but this isn't the most luxurious camper van out there. Its designers call it a multi-use vehicle and imagine owners switching gears between exploring the open road, working the laptop, hauling big cargo, and unwinding on the rooftop deck.</p>
-    </div>
-
-    <div class="services-col">
-      <h3>Vintage Campervan</h3>
-      <p>Nostalgia is a powerful marketing tool. Sounds, smells, and visuals from childhood elicit immediate emotions and memories. At one of my first cupping sessions, I was told not to talk about memory-induced flavors.</p>
-    </div>
-
-    <div class="services-col">
-      <h3>Classic Glampervan</h3>
-      <p>A stunning Vintage Glampervan that’s light and bright, having been lovingly restored with style. With a double bed at one end and a convertible table into a king single (suitable for 2 small children) at the other end, everyone will be nice and cosy. </p>
-    </div>
-  </div>
-
-</section>
-<!-----services pic--->
-  <section class="services-pic">
-    <div class="row">
-      <div class="servpic-col">
-        <img src="img/retro.jpg" alt="">
-        <div class="layer">
+    <section class="about-us">
+      <div class="row">
+        <div class="about-col">
+          <h1>EARTHBATH <br> Oatmeal & Aloe Shampoo - Vanilla & Almond</h1>
+          <p>
+            Purified water, colloidal oatmeal, renewable plant-derived & coconut-based cleansers, organic aloe vera, vitamins A, B, D, & E, panthenol, botanical fragrances of vanilla & almond, preservative.
+            <br><br>• Promote healing, and re-moisturize sensitive, dry skin.
+            <br><br>• Soap free and pH-balanced.
+            <br><br>• Safe for all animals over 6 weeks.
+          </p>
         </div>
-        <h2>Retro Campervan</h2>
-        <h3>Can Accommodate up to 2-4 people</h3>
-      </div>
-      <div class="servpic-col">
-        <img src="img/modern.jpg" alt="">
-        <div class="layer">
+        <div class="about-col">
+          <img src="img/featured.jpg" alt="">
         </div>
-        <h2>Modern Glampervan</h2>
-        <h3>Can Accommodate up to 1-2 people</h3>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="services-pic">
-    <div class="row">
-      <div class="servpic-col">
-        <img src="img/vintage.jpg" alt="">
-        <div class="layer">
-        </div>
-        <h2>Vintage Campervan</h2>
-        <h3>Can Accommodate up to 1-3 people</h3>
+    <section class="services">
+      <h1>Featured Products!</h1>
+      <div class="row">
+        <a href="productview.php" class="services-col">
+          <img src="img/product1.jpg" alt="">
+          <h3>Puppy Dry Dog Food</h3>
+          <span class="star-rating">⭐⭐⭐⭐⭐</span>
+          <h3>₱ 290.00</h3>
+        </a>
+        <a href="productview.php" class="services-col">
+          <img src="img/product2.jpg" alt="">
+          <h3>3m Retractable Dog Leash</h3>
+          <span class="star-rating">⭐⭐⭐⭐</span>
+          <h3>₱ 150.00</h3>
+        </a>
+        <a href="productview.php" class="services-col">
+          <img src="img/product3.jpg" alt="">
+          <h3>Bowl Fun Feeder</h3>
+          <span class="star-rating">⭐⭐⭐</span>
+          <h3>₱ 125.00</h3>
+        </a>
+        <a href="productview.php" class="services-col">
+          <img src="img/product4.jpg" alt="">
+          <h3>Dog Treats</h3>
+          <span class="star-rating">⭐⭐⭐⭐⭐</span>
+          <h3>₱ 350.00</h3>
+        </a>
       </div>
-      <div class="servpic-col">
-        <img src="img/classic.jpg" alt="">
-        <div class="layer">
-        </div>
-        <h2>Classic Glampervan</h2>
-        <h3>Can Accommodate up to 1-2 people</h3>
-      </div>
-    </div>
-  </section>
+    </section>
 
-<!----call to act-->
+    <section class="cta1">
+      <h1>Formulated to support <br> your senior dog!</h1>
+      <a href="productview.php" class="hero-btn1">Buy Now!</a>
+    </section>
 
-<section class="cta">
-  <h1>Don't Compromise. <br> Explore The Outdoors In Comfort.</h1>
-  <a href="contact.php" class="hero-btn">Contact Us!</a>
-</section>
+    <section class="review">
+      <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+      <div class="elfsight-app-3464a615-98c1-4e2f-9ccd-f9bd95b5bd4b" data-elfsight-app-lazy></div>
+    </section>
 
-<!---footer--->
-<section class="footer">
-   <h4>About Us</h4>
-   <p>We came up to this concept “itchy feet” that is because us Filipino had a thinking that whenever our feet feel itchy we want to go somewhere. <br>NOT, because we have skin allergy or something. Especially, that we are experiencing pandemic we were locked up to our houses for almost a year without any other activities like going <br> to school, mall, go to gym and go to different places to travel and explore.
+    <section class="cta">
+      <h1>Stay up to date about <br> our latest offers!</h1>
+      <a href="contact.php" class="hero-btn">Contact Us!</a>
+    </section>
 
-A lot of people right now are excited to go somewhere to travel, <br>explore and relax again. We saw a lot of post in social media that people are going back to their track, they are going to beach, they do hiking again, they go out of town. <br> That's why we made a new service that will help a lot of people who are excited to go somewhere to relax, travel, <br> explore or go around wherever they please without worrying about where they'll spend their night.</p>
-  <div class="icons">
-    <i class="fa fa-facebook"></i>
-    <i class="fa fa-twitter"></i>
-    <i class="fa fa-instagram"></i>
-  </div>
-
-  </section>
-
-
-
+    <?php include("footer.php"); ?>
   </body>
 </html>

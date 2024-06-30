@@ -83,7 +83,7 @@
                     <input type="text" id="quantity" value="1" readonly>
                     <button class="quantity-button" onclick="increaseQuantity()">+</button>
                 </div>
-                <button id="add-to-cart-button" class="add-to-cart-button">Add to Cart</button>
+                <button id="add-to-cart-button" class="add-to-cart-button" onclick="alert('Please Log In First!')">Add to Cart</button>
             </div>
         </div>
         <div class="product-details">
@@ -125,7 +125,7 @@
         const flavorElement = document.querySelector('.flavor-option.selected');
 
         if (!sizeElement || !flavorElement) {
-            alert('Please select a size and flavor before adding to cart.');
+           
             return;
         }
 
