@@ -135,6 +135,7 @@ body {
     border: none;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 5%;
 }
 
 .checkout-button:hover {

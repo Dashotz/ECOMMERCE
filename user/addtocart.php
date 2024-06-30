@@ -1,7 +1,31 @@
 <?php
 include 'inc/db.php';
 session_start();
-$user_id = 1;  // Example user ID, replace with actual user ID if you have user authentication
+
+// Fetch user ID from session
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        $username = htmlspecialchars($user['username']);
+        $email = htmlspecialchars($user['email']);
+        // and so on...
+    } else {
+        echo "No user found with that ID.";
+    }
+
+    $stmt->close();
+} else {
+    echo "User is not logged in.";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +36,15 @@ $user_id = 1;  // Example user ID, replace with actual user ID if you have user 
     <title>Pawfect Shoppe - Cart</title>
     <link rel="stylesheet" href="css/addtocart.css">
     <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/nav1.css">   
+    <script src="https://kit.fontawesome.com/249726be58.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header Section -->
     <header>
         <section class="header">
-            <?php include("../inc/nav.php"); ?>     
+            <?php include("../inc/nav.php"); ?>   
+            <?php include("../inc/nav1.php"); ?>     
         </section>
     </header>
     

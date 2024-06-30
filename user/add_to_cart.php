@@ -9,7 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $flavor = $data['flavor'];
     $quantity = intval($data['quantity']);
     $img = $data['img'];
-    $user_id = 1;  // Example user ID, replace with actual user ID if you have user authentication
+
+    // Fetch user_id from session
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'User not logged in']);
+        exit;
+    }
 
     // Add to session cart
     if (!isset($_SESSION['cart'])) {

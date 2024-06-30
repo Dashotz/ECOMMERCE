@@ -33,9 +33,7 @@ $user_id = 1;  // Example user ID, replace with actual user ID if you have user 
                 </ul>
                 <h2>My Orders</h2>
                 <ul>
-                    <li><a href="orders.php" class="active">My Orders</a></li>
-                    <li><a href="returns.php">My Returns</a></li>
-                    <li><a href="cancellations.php">My Cancellations</a></li>
+                    <li><a href="orders.php" class="active">My Orders</a></li>                   
                 </ul>
             </aside>
             <section class="account-details">

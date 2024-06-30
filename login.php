@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'inc/db.php'; // Your database connection
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
